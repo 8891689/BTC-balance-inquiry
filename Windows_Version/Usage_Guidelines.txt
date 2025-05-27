@@ -1,0 +1,95 @@
+In order to allow users to add environment variables so that a program can run from anywhere (usually directly in the command prompt or PowerShell) or the program can find the resources it needs, there are two main methods:
+Setting through the graphical interface (recommended for ordinary users): This is the most intuitive and most commonly used method, and it is also the least error-prone for ordinary users.
+Setting through the command line setx command (suitable for advanced users or script automation): It is convenient for batch scripts or when quick settings are required, but the operation is not as intuitive as the graphical interface.
+Below I will explain these two methods in detail.
+Method 1: Setting environment variables through the graphical interface (recommended)
+This method allows users to modify or add environment variables directly in Windows settings without command line knowledge.
+Steps:
+Open "System Properties":
+In Windows 10/11: Right-click "This PC" (or "My Computer") and select "Properties". In the window that opens, click "Advanced System Settings" on the right.
+Or, enter "environment variables" in the search bar and directly click "Edit system environment variables".
+Click the "Environment Variables" button:
+In the "System Properties" window, switch to the "Advanced" tab, and then click the "Environment Variables" button at the bottom.
+
+Choose to add "User variables" or "System variables":
+User variables (User variables for [your username]): Only valid for the currently logged in user. If you want this variable to only affect your own programs, or you are the only user using this computer, select here.
+System variables (System variables): Valid for all users. If you install a program that needs to be accessible to all users, or it is a system-level tool (such as Java JDK, Python, etc.), it is usually added here. Modifying system variables requires administrator privileges.
+
+Add a new variable:
+Click the "New" button under the area you selected (User variables or System variables).
+In the pop-up "New User variable" or "New System variable" dialog box:
+Variable name (Variable name): Enter the name of the variable (for example: MY_APP_HOME).
+Variable value (Variable value): Enter the value corresponding to the variable (for example: C:\MyApplication).
+Click "OK".
+
+Modify or add paths to the Path variable (most common scenario):
+The Path variable is a list of directories that Windows uses to look for executable files. If you want to be able to run a program by typing its name (e.g. myprogram.exe) from any directory, you need to add the program's directory to the Path variable.
+Find and select the Path variable in the User Variables or System Variables list.
+Click the Edit button.
+In the Edit Environment Variable dialog box that pops up:
+In Windows 10/11: The interface is usually a list. Click New, then type or browse to the directory where your program is located (e.g. C:\MyApplication\bin). Then click OK.
+In older versions of Windows (or when list mode is inconvenient): The variable value is a long string with each path separated by a semicolon ;. You need to add a semicolon to the end of the existing value, followed by your new path (e.g. C:\ExistingPath;C:\MyApplication\bin). Be careful not to delete the existing path!
+
+Confirm and save:
+Click "OK" all the way to close all open dialog boxes.
+Effective time:
+Changes to environment variables will not take effect immediately for all currently running programs.
+You need to close all currently open Command Prompt windows, PowerShell windows, or any affected programs, and then reopen them for the new environment variables to be recognized.
+For some complex programs that rely heavily on environment variables, you may even need to restart the computer to ensure that all components read the latest environment variable values.
+Method 2: Set through the command line setx command (suitable for advanced users)
+The setx command allows you to permanently add or modify environment variables through the command line.
+Basic syntax:
+setx variable name "variable value" [options]
+
+Example:
+Add user environment variables:
+If you want to add a user environment variable named MY_PROGRAM_DIR with a value of C:\ProgramFiles\MyProgram:
+setx MY_PROGRAM_DIR "C:\ProgramFiles\MyProgram"
+
+After execution, it will display Success: The specified value has been saved.
+Adding a system environment variable (administrator privileges required):
+If you want to add a system environment variable named SHARED_LIBS with a value of D:\SharedLibraries:
+First, open a command prompt as an administrator (search cmd in the start menu, right-click and select "Run as administrator").
+Then enter the command:
+setx /M SHARED_LIBS "D:\SharedLibraries"
+
+Adding a new path to the Path variable:
+This is one of the most common uses.
+Adding to the user Path:
+setx PATH "%PATH%;C:\NewTool\bin"
+
+Adding to the system Path (administrator privileges required):
+Open a command prompt as an administrator.
+Then enter the command:
+setx /M PATH "%PATH%;D:\GlobalScripts"
+
+Important:
+The output of the setx command only indicates that the command itself was executed successfully, that is, it successfully wrote the value to the registry. But this value will not immediately affect the current command line session.
+Again, you need to reopen a new command prompt window or restart the relevant program to see the effect.
+The setx command has a length limit for the PATH variable (usually 1024 or 2048 characters, depending on the Windows version and the variable type). If the PATH variable is already very long, appending directly with setx may cause it to be truncated and the original path to be lost! For very long PATH variables, it is strongly recommended to use the graphical interface to modify it because it has a better handling mechanism.
+How to verify whether the environment variable is added successfully?
+Whether through the graphical interface or the setx command, after adding the variable:
+Close all currently open command prompts or PowerShell windows.
+Reopen a new command prompt or PowerShell window.
+Use the echo command to view the value of the variable:
+echo %MY_PROGRAM_DIR%
+echo %PATH%
+
+If the value you set is displayed, it means that the addition was successful.
+Summary:
+For ordinary users or first-time settings: Prefer to use the graphical interface to add environment variables, especially Path variables, because it is more intuitive and safe.
+For automation or experienced users: You can use the setx command, but be aware of its limitations and permission requirements.
+
+D:\kaiyuan>aq.exe -p 0200057b53e8004f82b1e7ed9c2989b55e9969973d8413318ea2e56cca39b4e471
+Address: bc1qmt2m7np4aey7639h3aapj3wdvjql85v6fgg9dj
+Amount: 0.00312000 BTC
+
+D:\kaiyuan>aq.exe -h 751e76e8199196d454941c45d1b3a323f1433bd6
+Address: 1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH
+Amount: 0.00123456 BTC
+Address: bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4
+Amount: 0.00123654 BTC
+Address: 3JvL6Ymt8MVWiCNHC7oWU6nLeHNJKLZGLN
+Amount: 0.00000011 BTC
+
+
