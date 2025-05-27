@@ -15,6 +15,7 @@ Derive and query BTC addresses from HEX formatted Hash160.
 <Address><TAB><Amount_in_Satoshi_units>
 
 6. Mainly dependent on, you need to download the latest address with the balance data file (the one with the value at the end), so that the program can query accurately, the newer the more accurate.
+7. Or go to the upper right corner, named Release Place, and click to download.
 
 http://addresses.loyce.club/
 
