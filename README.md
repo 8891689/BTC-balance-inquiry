@@ -14,16 +14,21 @@ Derive and query BTC addresses from HEX formatted Hash160.
   Database files (defaulting to .txt files) should adhere to the following format, with one entry per line:
 <Address><TAB><Amount_in_Satoshi_units>
 
+6. Mainly dependent on, you need to download the latest address with the balance data file (the one with the value at the end), so that the program can query accurately, the newer the more accurate.
+
+http://addresses.loyce.club/
+
 For example:
 ```
 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa	100000000
 0x742d35Cc6634C0532925a3b844Bc454e4438f44e	500000000000000000
 ```
-
+```
 <Address>: The cryptocurrency address.
 <TAB>: A single tab character as a separator.
-<Amount_in_Satoshi_units>: For BTC, this is the amount in Satoshis (integer). For ETH, it's typically in Wei. The program currently formats BTC amounts primarily.
-
+<Amount_in_Satoshi_units>: For BTC, this is the amount in Satoshis (integer).
+For ETH, it's typically in Wei. The program currently formats BTC amounts primarily.
+```
 # Usage
 The program will automatically scan for .txt files in the current directory as databases (unless -f is specified).
 Usage:
@@ -41,8 +46,8 @@ Usage:
 Options:
   -f <file_list> : Specify one or more database files for query (overrides auto-scan).
   -x             : (Batch mode) Output only found addresses, without amount.
-
 ```
+
 Examples:
 Interactive Mode (auto-scans databases):
 ```
@@ -119,21 +124,31 @@ If you have MinGW-w64 (a GCC toolset for Windows) installed, you can execute a c
 gcc Amount_Query.c sha256.c ripemd160.c secp256k1.c keccak256.c bech32.c base58.c -O3 -o aq.exe
 ```
 (On Windows, executables typically have the .exe suffix).
+
 Windows (using Microsoft Visual Studio - MSVC):
+
 Open Visual Studio.
+```
 Create a new empty C++ project (or C project if available).
 Add all .c and .h files to your project.
+
 Ensure the project is set to compile C code (if you created a C++ project, it usually auto-detects for .c files, but settings might need adjustment).
+
 MSVC might issue warnings or errors for certain POSIX-specific functions (like strcasecmp or strdup).
 For strcasecmp, you can use _stricmp.
+
 For strdup, you can use _strdup.
+
 You might need to use conditional compilation in your code to handle these differences or find compatible implementations.
 The current code uses strings.h mainly for strcasecmp, and scan_directory_for_data_files under _WIN32 already uses _strdup.
 Build (Generate Solution).
+```
 # Cross-Platform Notes:
 
 Directory Scanning: The scan_directory_for_data_files function uses conditional compilation (#ifdef _WIN32) to handle directory traversal differently for Windows and POSIX systems.
+
 strcasecmp: POSIX systems usually provide strcasecmp in <strings.h>. The Windows MSVC equivalent is _stricmp in <string.h>. MinGW GCC might provide strcasecmp.
+
 strdup: POSIX systems usually provide strdup in <string.h>. The Windows MSVC equivalent is _strdup in <string.h>.
 If you encounter compilation issues, check the compiler's error output, which usually indicates missing functions or header files.
 
