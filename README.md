@@ -108,11 +108,11 @@ Linux / macOS (using GCC or Clang):
 
 In your terminal, navigate to the directory containing all source files and execute:
 ```
-gcc Amount_Query.c sha256.c ripemd160.c secp256k1.c keccak256.c bech32.c base58.c -O3 -o aq
+gcc amount_query.c sha256.c ripemd160.c secp256k1.c keccak256.c bech32.c base58.c -O3 -o aq
 ```
 Or using Clang:
 ```
-clang Amount_Query.c sha256.c ripemd160.c secp256k1.c keccak256.c bech32.c base58.c -O3 -o aq
+clang amount_query.c sha256.c ripemd160.c secp256k1.c keccak256.c bech32.c base58.c -O3 -o aq
 ```
 -O3: Enables a high level of optimization.
 -o Amount_Query: Specifies the output executable name as aq.
@@ -121,7 +121,7 @@ clang Amount_Query.c sha256.c ripemd160.c secp256k1.c keccak256.c bech32.c base5
 Windows (using MinGW-w64 GCC):
 If you have MinGW-w64 (a GCC toolset for Windows) installed, you can execute a command similar to the Linux/macOS one in the MinGW terminal or command prompt:
 ```
-gcc Amount_Query.c sha256.c ripemd160.c secp256k1.c keccak256.c bech32.c base58.c -O3 -o aq.exe
+gcc amount_query.c sha256.c ripemd160.c secp256k1.c keccak256.c bech32.c base58.c -O3 -o aq.exe
 ```
 (On Windows, executables typically have the .exe suffix).
 
